@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config>
+	<Left>
+		<Item path="H:\VS_WorkSpace\CCompareTool\CCompareTool\Resources" />
+		<Item path="H:\VS_WorkSpace\CCompareTool\CCompareTool" />
+		<Item path="H:\VS_WorkSpace\asfqwe" />
+		<Item path="C:\" />
+	</Left>
+	<Right>
+		<Item path="H:\VS_WorkSpace\asfqwe\GeneratedFiles" />
+		<Item path="H:\VS_WorkSpace\CCompareTool\CCompareTool\pugixml-master" />
+		<Item path="H:\1" />
+	</Right>
+	<Output>
+		<Item path="H:/VS_WorkSpace/asfqwe" />
+	</Output>
+</Config>

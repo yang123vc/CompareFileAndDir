@@ -9,9 +9,9 @@
 const QString g_strConfigName = "config.xml";
 
 const int g_nFileName = 0;
-//æ–‡ä»¶ç±»å‹æ‰€åœ¨åˆ—æ•°
+//ÎÄ¼şÀàĞÍËùÔÚÁĞÊı
 const int g_nFileType = 2;
-//æœ€åä¿®æ”¹æ—¶é—´
+//×îºóĞŞ¸ÄÊ±¼ä
 const int g_nFileTime = 3;
 
 const QColor g_FindNotColor = QColor(252,230,230, 200);
