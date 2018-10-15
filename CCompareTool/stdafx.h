@@ -1,6 +1,6 @@
 #include <QtGui>
 
-#include "CompareToolFileModel_p.h"
+//#include "CompareToolFileModel_p.h"
 //#include "CompareToolFileModel.h"
 
 #define IN

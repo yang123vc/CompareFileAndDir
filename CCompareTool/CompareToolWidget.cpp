@@ -1,9 +1,10 @@
 #include "StdAfx.h"
 
 #include "CompareToolConfigManager.h"
-#include "CompareToolFileModel.h"
+//#include "CompareToolFileModel.h"
 #include "CompareToolThread.h"
 //#include <CompareToolFileModel>
+#include <QFileSystemModel> 
 
 #include "CompareToolWidget.h"
 #include "ui_CompareToolWidget.h"
@@ -13,8 +14,8 @@
 class CompareToolWidgetImpl
 {
 public:
-	CompareToolFileModel * m_LeftModel;
-	CompareToolFileModel * m_RightModel;
+	QFileSystemModel * m_LeftModel;
+	QFileSystemModel * m_RightModel;
 	QMenu				 * m_LeftMenu;
 	QMenu				 * m_RightMenu;
 	QThread				 * m_LeftThread;
