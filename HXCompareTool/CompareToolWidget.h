@@ -10,7 +10,10 @@ class CompareToolWidget : public QWidget
 {
 	Q_OBJECT
 	Q_DECLARE_PRIVATE(CompareToolWidget)
-
+//#define Q_DECLARE_PRIVATE(Class) \
+//    inline Class##Private* d_func() { return reinterpret_cast<Class##Private *>(qGetPtrHelper(d_ptr)); } \
+//    inline const Class##Private* d_func() const { return reinterpret_cast<const Class##Private *>(qGetPtrHelper(d_ptr)); } \
+//    friend class Class##Private;
 public:
 	CompareToolWidget(QWidget *parent = Q_NULLPTR);
 	~CompareToolWidget();
@@ -92,11 +95,11 @@ public:
 //	QString GetRelativeFilePath(const QModelIndex & index, ConfigType type);
 
 
-	friend CompareToolWidgetPrivate *qt_CompareToolWidget_private(CompareToolWidget *widget);
+	//friend CompareToolWidgetPrivate *qt_CompareToolWidget_private(CompareToolWidget *widget);
 private:
 	Ui::CompareToolWidget *ui;
 	Q_DISABLE_COPY(CompareToolWidget)
-	Q_PRIVATE_SLOT(d_func(), void _q_showIfNotHidden())
+//	Q_PRIVATE_SLOT(d_func(), void _q_showIfNotHidden())
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(CompareToolWidget::RenderFlags)
+//Q_DECLARE_OPERATORS_FOR_FLAGS(CompareToolWidget::RenderFlags)

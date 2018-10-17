@@ -30,6 +30,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>E:\QT5.10.0\5.11.0\msvc2017_64\include\QtCore\5.11.0;E:\QT5.10.0\5.11.0\msvc2017_64\include\QtWidgets\5.11.0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -164,6 +165,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="HXCompareTool.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hxcomparetool_zh.ts" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

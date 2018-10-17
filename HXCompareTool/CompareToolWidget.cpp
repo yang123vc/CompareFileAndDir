@@ -2,11 +2,12 @@
 
 #include "CompareToolConfigManager.h"
 #include <QFileSystemModel> 
+#include <QtWidgets/private/qwidget_p.h>
 
 #include "CompareToolWidget.h"
 #include "ui_CompareToolWidget.h"
 
-class CompareToolWidgetPrivate
+class CompareToolWidgetPrivate : public QWidgetPrivate
 {
 public:
 	QFileSystemModel * m_LeftModel;
@@ -38,13 +39,13 @@ public:
 };
 
 
-CompareToolWidgetPrivate *qt_CompareToolWidget_private(CompareToolWidget *widget)
-{
-	return widget->d_func();
-}
+//CompareToolWidgetPrivate *qt_CompareToolWidget_private(CompareToolWidget *widget)
+//{
+//	return widget->d_func();
+//}
 
 CompareToolWidget::CompareToolWidget(QWidget *parent)
-	: QWidget(parent), QObject(*new CompareToolWidgetPrivate, 0)
+	: QWidget(*new CompareToolWidgetPrivate(),0, Qt::WindowFlags())
 {
 	ui = new Ui::CompareToolWidget();
 	ui->setupUi(this);
@@ -57,7 +58,6 @@ CompareToolWidget::CompareToolWidget(QWidget *parent)
 
 CompareToolWidget::~CompareToolWidget()
 {
-
 	//SafeDeletePoint(m_p);
 	delete ui;
 }
