@@ -1,11 +1,12 @@
 #pragma once
-
+#include <qobject.h>
 #include "pugixml.hpp"
 
-class CompareToolConfigManagerImpl;
-class CompareToolConfigManager
+class CompareToolConfigManagerPrivate;
+class CompareToolConfigManager : public QObject
 {
-
+	Q_OBJECT
+		Q_DECLARE_PRIVATE(CompareToolConfigManager)
 public:
 	static CompareToolConfigManager * Instance();
 	~CompareToolConfigManager(void);
@@ -37,7 +38,9 @@ private:
 	void LoadItem(QStringList & config, const pugi::xml_node & node);
 
 	CompareToolConfigManager();
-	CompareToolConfigManagerImpl * m_p;
+
+
+	Q_DISABLE_COPY(CompareToolConfigManager)
 
 };
 

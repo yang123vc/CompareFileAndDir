@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "HXCompareTool.h"
+#include "CompareToolWidget.h"
 #include "CompareToolConfigManager.h"
 #include <QtWidgets/QApplication>
 
@@ -9,7 +9,8 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 	QTextCodec *codec = QTextCodec::codecForName("gbk");
 	QTextCodec::setCodecForLocale(codec);
-	HXCompareTool w;
+	CompareToolWidget w;
+	w.Init();
 	w.show();
 	return a.exec();
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CompareToolThread.h"
-#include <QWidget>
+#include <QWidget> 
 
 namespace Ui { class CompareToolWidget; };
 
@@ -15,7 +15,7 @@ class CompareToolWidget : public QWidget
 //    inline const Class##Private* d_func() const { return reinterpret_cast<const Class##Private *>(qGetPtrHelper(d_ptr)); } \
 //    friend class Class##Private;
 public:
-	CompareToolWidget(QWidget *parent = Q_NULLPTR);
+	explicit CompareToolWidget(QWidget *parent = Q_NULLPTR);
 	~CompareToolWidget();
 
 
@@ -34,7 +34,7 @@ public:
 	};
 
 //
-//	void Init();
+	void Init();
 //
 //	void CompareAll();
 //

@@ -361,6 +361,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
     </CustomBuild>
+    <ClInclude Include="CompareToolWidget_p.h" />
     <ClInclude Include="GeneratedFiles\ui_CCompareTool.h" />
     <ClInclude Include="GeneratedFiles\ui_CompareTool.h" />
     <ClInclude Include="GeneratedFiles\ui_CompareToolTreeView.h" />

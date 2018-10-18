@@ -2,22 +2,14 @@
 
 #include "pugixml.hpp"
 
+#include "CompareToolConfigManager_p.h"
 #include "CompareToolConfigManager.h"
 
 
-class CompareToolConfigManagerImpl
-{
-public:
-	QStringList m_Right;
-	QStringList m_Left;
-	QStringList	m_Output;
-	bool		m_HaveChangeConfig;
-	CompareToolConfigManagerImpl():m_HaveChangeConfig(false)
-	{}
-};
-//CompareToolConfigManager * CompareToolConfigManager::m_p = new CompareToolConfigManager();
+//CompareToolConfigManager * CompareToolConfigManager::d = new CompareToolConfigManager();
 
-CompareToolConfigManager::CompareToolConfigManager(void):m_p(new CompareToolConfigManagerImpl())
+CompareToolConfigManager::CompareToolConfigManager(void)
+	:QObject(*new CompareToolConfigManagerPrivate(), 0)
 {
 }
 
@@ -25,7 +17,7 @@ CompareToolConfigManager::CompareToolConfigManager(void):m_p(new CompareToolConf
 CompareToolConfigManager::~CompareToolConfigManager(void)
 {
 	SaveConfig();
-	SafeDeletePoint<CompareToolConfigManagerImpl>(m_p);
+	//SafeDeletePoint<CompareToolConfigManagerImpl>(d);
 }
 
 CompareToolConfigManager * CompareToolConfigManager::Instance()
@@ -36,6 +28,7 @@ CompareToolConfigManager * CompareToolConfigManager::Instance()
 
 bool CompareToolConfigManager::Load( const QString & PathName )
 {
+	Q_D(CompareToolConfigManager);
 	//SaveConfig();
 	if (PathName == "")
 	{
@@ -51,13 +44,13 @@ bool CompareToolConfigManager::Load( const QString & PathName )
 
 	xml_node configNode = doc.child("Config");
 	xml_node RightNode = configNode.child("Right");
-	LoadItem(m_p->m_Right, RightNode);
+	LoadItem(d->m_Right, RightNode);
 	xml_node LeftNode = configNode.child("Left");
-	LoadItem(m_p->m_Left, LeftNode);
+	LoadItem(d->m_Left, LeftNode);
 
 
 	xml_node OutputNode = configNode.child("Output");
-	LoadItem(m_p->m_Output, OutputNode);
+	LoadItem(d->m_Output, OutputNode);
 
 	//SaveConfig();
 	return true;
@@ -66,6 +59,7 @@ bool CompareToolConfigManager::Load( const QString & PathName )
 
 void CompareToolConfigManager::AddList( const QString & text, QStringList & list )
 {
+	Q_D(CompareToolConfigManager);
 	bool bEque = false;
 	Q_FOREACH(const QString & str, list)
 	{
@@ -77,24 +71,27 @@ void CompareToolConfigManager::AddList( const QString & text, QStringList & list
 	}
 	if (!bEque)
 	{
-		m_p->m_HaveChangeConfig = true;
+		d->m_HaveChangeConfig = true;
 		list.push_back(text);
 	}
 }
 
 void CompareToolConfigManager::AddRightList( const QString & text )
 {
-	AddList(text, m_p->m_Right);
+	Q_D(CompareToolConfigManager);
+	AddList(text, d->m_Right);
 }
 
 void CompareToolConfigManager::AddLeftList( const QString & text )
 {
-	AddList(text, m_p->m_Left);
+	Q_D(CompareToolConfigManager);
+	AddList(text, d->m_Left);
 }
 
 void CompareToolConfigManager::SaveConfig()
 {
-	if(m_p->m_HaveChangeConfig)
+	Q_D(CompareToolConfigManager);
+	if(d->m_HaveChangeConfig)
 	{
 		QString path = "config.xml";
 		QFile file(path);
@@ -111,17 +108,17 @@ void CompareToolConfigManager::SaveConfig()
 
 		pugi::xml_node nodeRoot = doc.append_child( "Config" );
 		pugi::xml_node nodeLeft = nodeRoot.append_child( "Left" );
-		SaveNode(m_p->m_Left, nodeLeft);
+		SaveNode(d->m_Left, nodeLeft);
 
 		//nodeLeft.append_child("Item").append_attribute("path").set_value("C:");
 		//nodeLeft.append_child("Item").append_attribute("path").set_value("D:");
 		pugi::xml_node nodeRight = nodeRoot.append_child( "Right" );
-		SaveNode(m_p->m_Right, nodeRight);
+		SaveNode(d->m_Right, nodeRight);
 		//nodeRight.append_child("Item").append_attribute("path").set_value("E:");
 		//nodeRight.append_child("Item").append_attribute("path").set_value("F:");
 
 		pugi::xml_node nodeOutput = nodeRoot.append_child( "Output" );
-		SaveNode(m_p->m_Output, nodeOutput);
+		SaveNode(d->m_Output, nodeOutput);
 		
 		doc.save_file(path.toStdString().c_str(), "\t", 1U, pugi::encoding_utf8);;
 		
@@ -152,21 +149,25 @@ void CompareToolConfigManager::SaveNode( const QStringList & list, pugi::xml_nod
 
 void CompareToolConfigManager::AddOutput( const QString & text )
 {
-	m_p->m_Output.clear();
-	AddList(text, m_p->m_Output);
+	Q_D(CompareToolConfigManager);
+	d->m_Output.clear();
+	AddList(text, d->m_Output);
 }
 
 QStringList CompareToolConfigManager::Output() const
 {
-	return m_p->m_Output;
+	Q_D(CompareToolConfigManager);
+	return d->m_Output;
 }
 
 QStringList CompareToolConfigManager::LeftList() const
 {
-	return m_p->m_Left;
+	Q_D(CompareToolConfigManager);
+	return d->m_Left;
 }
 
 QStringList CompareToolConfigManager::RightList() const
 {
-	return m_p->m_Right;
+	Q_D(CompareToolConfigManager);
+	return d->m_Right;
 }
